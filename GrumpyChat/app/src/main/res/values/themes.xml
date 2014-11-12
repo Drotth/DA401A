@@ -1,0 +1,15 @@
+<resources>
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="android:Theme.Holo.Light">
+        <item name="android:windowBackground">@color/sand</item>
+        <item name="android:buttonStyle">@style/BtnStyle</item>
+        <item name="android:editTextStyle">@style/EditTextStyle</item>
+        <item name="android:actionBarStyle">@style/ActionBarStyle</item>
+    </style>
+
+    <style name="AppThemeNoBar" parent="android:Theme.Holo.Light.NoActionBar">
+        <item name="android:windowBackground">@color/sand</item>
+        <item name="android:buttonStyle">@style/BtnStyle</item>
+        <item name="android:editTextStyle">@style/EditTextStyle</item>
+    </style>
+</resources>

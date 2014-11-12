@@ -1,10 +1,10 @@
 package com.drotth.grumpychat;
 
+import android.app.ActionBar;
 import android.app.Activity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
-
 
 public class MainActivity extends Activity {
 
@@ -12,8 +12,11 @@ public class MainActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-    }
 
+        //ActionBar actionBar = getActionBar();
+        //actionBar.setDisplayShowHomeEnabled(false);
+        //actionBar.setDisplayHomeAsUpEnabled(true);
+    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
