@@ -1,12 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+
     <!-- General -->
     <string name="app_name">GrumpyChat</string>
     <string name="action_about">About</string>
+    <string name="action_groups">Groups</string>
 
-    <!-- Login screen -->
+    <!-- Login/start screen -->
     <string name="emailText">Email</string>
     <string name="passwordText">Password</string>
     <string name="loginBtn">Log in</string>
+    <string name="regBtn">Register</string>
+
+    <!-- Temporary placeholder info groups fragment -->
+    <string-array name="groups_array">
+        <item>Project P2</item>
+        <item>Exam work</item>
+        <item>DA401A team</item>
+        <item>Family</item>
+        <item>My cats</item>
+    </string-array>
 
 </resources>

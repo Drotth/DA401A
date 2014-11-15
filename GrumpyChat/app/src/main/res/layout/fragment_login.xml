@@ -5,22 +5,23 @@
 
     <ImageView
         android:layout_width="match_parent"
-        android:layout_marginTop="25dp"
-        android:layout_marginBottom="25dp"
+        android:layout_marginBottom="20dp"
         android:layout_height="260dp"
         android:src="@drawable/logo" />
 
     <!--TODO: Styles should come with manifest theme. Why aren't they?-->
     <EditText
         style="@style/EditTextStyle"
-        android:id="@+id/emailField"
+        android:id="@+id/emailFieldLogin"
         android:inputType="textEmailAddress"
+        android:text="placeholder"
         android:hint="@string/emailText" />
 
     <EditText
         style="@style/EditTextStyle"
-        android:id="@+id/passwordField"
+        android:id="@+id/passwordFieldLogin"
         android:inputType="textPassword"
+        android:text="placeholder"
         android:hint="@string/passwordText" />
 
     <Button
@@ -28,5 +29,11 @@
         android:id="@+id/loginBtn"
         android:text="@string/loginBtn"
         android:onClick="login" />
+
+    <Button
+        style="@style/BtnStyle"
+        android:id="@+id/regBtn1"
+        android:text="@string/regBtn"
+        android:onClick="register" />
 
 </LinearLayout>

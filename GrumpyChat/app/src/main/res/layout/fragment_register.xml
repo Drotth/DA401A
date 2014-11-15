@@ -1,0 +1,44 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <!-- TODO: Create proper style for regular texts with alignment, sort of-->
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"
+        android:layout_marginLeft="20dp"
+        android:textSize="20sp"
+        android:text="No account?"/>
+
+    <!-- TODO: Create string resource -->
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="20dp"
+        android:layout_marginLeft="20dp"
+        android:textSize="15sp"
+        android:text="Don't worry! Registration is free.
+Just create your account with an email and a password and you're good to go!"/>
+
+    <!--TODO: Styles should come with manifest theme. Why aren't they?-->
+    <EditText
+        style="@style/EditTextStyle"
+        android:id="@+id/emailFieldReg"
+        android:inputType="textEmailAddress"
+        android:hint="@string/emailText" />
+
+    <EditText
+        style="@style/EditTextStyle"
+        android:id="@+id/passwordFieldReg"
+        android:inputType="textPassword"
+        android:hint="@string/passwordText" />
+
+    <Button
+        style="@style/BtnStyle"
+        android:id="@+id/regBtn2"
+        android:text="@string/regBtn"
+        android:onClick="register" />
+
+</LinearLayout>
