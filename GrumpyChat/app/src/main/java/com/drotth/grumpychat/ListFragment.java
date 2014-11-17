@@ -7,6 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 public class ListFragment extends Fragment {
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -21,7 +22,6 @@ public class ListFragment extends Fragment {
     @Override
     public void onStart(){
         super.onStart();
-        // TODO: Why isn't R.string.action_groups working?
-        ((MainActivity) getActivity()).setActionBarTitle("Groups");
+        ((MainActivity) getActivity()).actionBar.setTitle(R.string.action_groups);
     }
 }

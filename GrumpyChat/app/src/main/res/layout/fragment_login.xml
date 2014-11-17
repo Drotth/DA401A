@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -15,25 +16,25 @@
         android:id="@+id/emailFieldLogin"
         android:inputType="textEmailAddress"
         android:text="placeholder"
-        android:hint="@string/emailText" />
+        android:hint="@string/email" />
 
     <EditText
         style="@style/EditTextStyle"
         android:id="@+id/passwordFieldLogin"
         android:inputType="textPassword"
         android:text="placeholder"
-        android:hint="@string/passwordText" />
+        android:hint="@string/password" />
 
     <Button
         style="@style/BtnStyle"
         android:id="@+id/loginBtn"
-        android:text="@string/loginBtn"
+        android:text="@string/login"
         android:onClick="login" />
 
     <Button
         style="@style/BtnStyle"
         android:id="@+id/regBtn1"
-        android:text="@string/regBtn"
+        android:text="@string/register"
         android:onClick="register" />
 
 </LinearLayout>

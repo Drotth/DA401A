@@ -1,9 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <!-- TODO: Fix proper styles and string resources -->
+    <!-- TODO: Fix proper styles for TextViews-->
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -19,7 +20,7 @@
         android:paddingTop="10dp"
         android:paddingLeft="10dp"
         android:textSize="15sp"
-        android:text="Version 1.234" />
+        android:text="@string/version" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -28,8 +29,6 @@
         android:paddingTop="20dp"
         android:paddingLeft="10dp"
         android:textSize="20sp"
-        android:text="An app for all of your chat needs.
-Grumpy Chat is the devil-born offspring of an internet meme and is,
-in reality, just an simple chat app." />
+        android:text="@string/app_desc" />
 
 </LinearLayout>

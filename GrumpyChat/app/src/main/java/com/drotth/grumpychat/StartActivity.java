@@ -55,17 +55,28 @@ public class StartActivity extends Activity {
                 FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
                 registerPage = new RegisterFragment();
                 fragmentTransaction.replace(R.id.fragmentViewStart, registerPage);
-                //TODO: This stack state is kept when entering the "if-else" below. Fix!
+                //TODO: Possible to stack several "back-presses". Fix!
                 fragmentTransaction.addToBackStack(null);
                 fragmentTransaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
                 fragmentTransaction.commit();
             }
         }
         else if (id == R.id.regBtn2){
+            EditText emailInsert = (EditText) findViewById(R.id.emailFieldReg);
+            String email = emailInsert.getText().toString();
+
+            EditText passInsert = (EditText) findViewById(R.id.passwordFieldReg);
+            String password = passInsert.getText().toString();
+
+            if (email.isEmpty() || password.isEmpty()) {
+                Toast.makeText(this, "Enter both email and password", Toast.LENGTH_SHORT).show();
+            }
+            else {
                 FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
                 fragmentTransaction.replace(R.id.fragmentViewStart, loginPage);
                 fragmentTransaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
                 fragmentTransaction.commit();
+            }
         }
     }
 }

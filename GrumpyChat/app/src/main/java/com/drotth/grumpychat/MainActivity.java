@@ -7,8 +7,11 @@ import android.app.FragmentTransaction;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.view.ViewConfiguration;
-import android.widget.Toast;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.ListView;
 
 import java.lang.reflect.Field;
 
@@ -18,6 +21,16 @@ public class MainActivity extends Activity {
     ActionBar actionBar;
     ListFragment groupsPage;
     AboutFragment aboutPage;
+
+    //Placeholder group list names
+    //String[] group_names = getResources().getStringArray(R.array.groups_array);
+    String[] group_test = {"Project P2", "Exam work", "DA401A team", "Family"};
+
+    private AdapterView.OnItemClickListener onGroupClick = new AdapterView.OnItemClickListener() {
+        public void onItemClick(AdapterView parent, View v, int position, long id) {
+            // TODO: do something
+        }
+    };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,6 +55,13 @@ public class MainActivity extends Activity {
         groupsPage = new ListFragment();
         fragmentTransaction.add(R.id.fragmentViewMain, groupsPage);
         fragmentTransaction.commit();
+
+        ArrayAdapter<String> listAdapter = new ArrayAdapter<String>(this,
+                android.R.layout.simple_list_item_1, group_test);
+
+        ListView groupsList = (ListView) findViewById(R.id.groupsListView);
+        groupsList.setAdapter(listAdapter); // TODO: Why nullpointerexception?
+        groupsList.setOnItemClickListener(onGroupClick);
     }
 
     @Override
@@ -67,9 +87,5 @@ public class MainActivity extends Activity {
         }
 
         return super.onOptionsItemSelected(item);
-    }
-
-    public void setActionBarTitle(String title){
-        actionBar.setTitle(title);
     }
 }
