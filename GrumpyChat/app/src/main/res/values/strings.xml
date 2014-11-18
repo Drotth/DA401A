@@ -21,13 +21,4 @@
         \nGrumpy Chat is the devil-born offspring of an internet meme and is,
         in reality, just an simple chat app.</string>
 
-    <!-- Temporary placeholder info groups fragment -->
-    <string-array name="groups_array">
-        <item>Project P2</item>
-        <item>Exam work</item>
-        <item>DA401A team</item>
-        <item>Family</item>
-        <item>My cats</item>
-    </string-array>
-
 </resources>
