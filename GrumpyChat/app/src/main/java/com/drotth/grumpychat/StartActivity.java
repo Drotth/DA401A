@@ -11,9 +11,9 @@ import android.widget.Toast;
 
 public class StartActivity extends Activity {
 
-    FragmentManager fragmentManager;
-    LoginFragment loginPage;
-    RegisterFragment registerPage;
+    private FragmentManager fragmentManager;
+    private LoginFragment loginPage;
+    private RegisterFragment registerPage;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

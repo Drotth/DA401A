@@ -20,5 +20,6 @@
     <string name="app_desc">An app for all of your chat needs.
         \nGrumpy Chat is the devil-born offspring of an internet meme and is,
         in reality, just an simple chat app.</string>
+    <string name="send">Send</string>
 
 </resources>

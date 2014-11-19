@@ -8,16 +8,16 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.ViewConfiguration;
-import android.widget.Toast;
 
 import java.lang.reflect.Field;
 
 public class MainActivity extends Activity implements GroupsFragment.OnGroupsInteractionListener {
 
-    FragmentManager fragmentManager;
-    ActionBar actionBar;
-    GroupsFragment groupsPage;
-    AboutFragment aboutPage;
+    private FragmentManager fragmentManager;
+    protected ActionBar actionBar;
+    private GroupsFragment groupsPage;
+    private AboutFragment aboutPage;
+    private ChatFragment chatPage;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -71,6 +71,11 @@ public class MainActivity extends Activity implements GroupsFragment.OnGroupsInt
 
     @Override
     public void onGroupClick(String groupName) {
-        Toast.makeText(this, groupName, Toast.LENGTH_SHORT).show();
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        chatPage = ChatFragment.newInstance(groupName);
+        fragmentTransaction.replace(R.id.fragmentViewMain, chatPage);
+        fragmentTransaction.addToBackStack(null);
+        fragmentTransaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
+        fragmentTransaction.commit();
     }
 }
