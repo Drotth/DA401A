@@ -6,41 +6,28 @@
         <item name="android:background">@color/white</item>
     </style>
 
-    <!-- Email/Password EditText style-->
+    <!-- Button style -->
+    <style name="BtnStyle" parent="@android:style/Widget.Holo.Light.Button">
+        <item name="android:textAppearance">@style/BtnTextStyle</item>
+    </style>
+
+    <!-- Button text style -->
+    <style name="BtnTextStyle">
+        <item name="android:textSize">20sp</item>
+        <item name="android:typeface">normal</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <!-- EditText style-->
     <style name="EditTextStyle" parent="@android:style/Widget.Holo.Light.EditText">
-        <item name="android:layout_width">wrap_content</item>
-        <item name="android:layout_height">wrap_content</item>
-        <item name="android:layout_gravity">center</item>
-        <item name="android:layout_marginLeft">16dp</item>
-        <item name="android:layout_marginRight">16dp</item>
-        <item name="android:layout_marginBottom">10dp</item>
         <item name="android:padding">10dp</item>
         <item name="android:background">@color/white</item>
         <item name="android:ems">15</item>
         <item name="android:singleLine">true</item>
     </style>
 
-    <!-- Start Activity buttons style -->
-    <style name="BtnStyle" parent="@android:style/Widget.Holo.Light.Button">
-        <item name="android:textAppearance">@style/BtnTextStyle</item>
-        <item name="android:layout_width">200dp</item>
-        <item name="android:layout_height">wrap_content</item>
-        <item name="android:layout_gravity">center</item>
-    </style>
-
-    <!-- Start Activity buttons text style -->
-    <style name="BtnTextStyle">
-        <item name="android:textSize">20sp</item>
-        <item name="android:textColor">@color/white</item>
-        <item name="android:typeface">normal</item>
-        <item name="android:textStyle">bold</item>
-        <item name="android:padding">5dp</item>
-    </style>
-
-    <!-- Groups list style -->
-    <style name="GroupsList" parent="@android:style/Widget.Holo.Light.ListView">
-        <item name="android:layout_width">match_parent</item>
-        <item name="android:layout_height">fill_parent</item>
+    <!-- ListView style -->
+    <style name="ListViewStyle" parent="@android:style/Widget.Holo.Light.ListView">
         <item name="android:listSelector">@drawable/group_list_selector</item>
     </style>
 
