@@ -3,7 +3,7 @@
     <!-- ActionBar style -->
     <style name="ActionBarStyle" parent="@android:style/Widget.Holo.Light.ActionBar">
         <item name="android:displayOptions">homeAsUp|showTitle</item>
-        <item name="android:background">@color/white</item>
+        <item name="android:background">@color/blueDark</item>
     </style>
 
     <!-- Button style -->
