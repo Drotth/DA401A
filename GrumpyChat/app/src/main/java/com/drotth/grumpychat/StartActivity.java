@@ -17,10 +17,10 @@ public class StartActivity extends Activity {
 
     //remember to change this to da401a before demo
     private static final String FIREBASE_URL = "https://testda401a.firebaseio.com";
+    private Firebase firebase;
     private FragmentManager fragmentManager;
     private LoginFragment loginPage;
     private RegisterFragment registerPage;
-    private Firebase firebase;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -73,7 +73,7 @@ public class StartActivity extends Activity {
 
     private void login(String email, String password){
         if (email.isEmpty() || password.isEmpty()) {
-            Toast.makeText(this, "Enter both email and password", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getApplicationContext(), "Enter both email and password", Toast.LENGTH_SHORT).show();
         }
 
         else{
@@ -94,7 +94,7 @@ public class StartActivity extends Activity {
 
     public void register(final String email, final String password){
         if (email.isEmpty() || password.isEmpty()) {
-            Toast.makeText(this, "Enter both email and password", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getApplicationContext(), "Enter both email and password", Toast.LENGTH_SHORT).show();
         }
 
         else {

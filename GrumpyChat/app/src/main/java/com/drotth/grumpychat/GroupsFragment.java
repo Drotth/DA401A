@@ -42,7 +42,7 @@ public class GroupsFragment extends Fragment implements ListView.OnItemClickList
     @Override
     public void onStart(){
         super.onStart();
-        ((MainActivity) getActivity()).actionBar.setTitle(R.string.action_groups);
+        ((MainActivity) getActivity()).actionBar.setTitle(R.string.groups);
     }
 
     @Override
@@ -59,8 +59,7 @@ public class GroupsFragment extends Fragment implements ListView.OnItemClickList
 
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-        // TODO: What is the benefit of checking with null first, rather than last?
-        if (null != listListener) {
+        if (listListener != null) {
             listListener.onGroupClick((String) parent.getItemAtPosition(position));
         }
     }

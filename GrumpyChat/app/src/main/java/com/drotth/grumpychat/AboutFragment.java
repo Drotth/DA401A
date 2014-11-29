@@ -22,6 +22,6 @@ public class AboutFragment extends Fragment {
     @Override
     public void onStart(){
         super.onStart();
-        ((MainActivity) getActivity()).actionBar.setTitle(R.string.action_about);
+        ((MainActivity) getActivity()).actionBar.setTitle(R.string.about);
     }
 }

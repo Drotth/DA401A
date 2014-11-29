@@ -4,15 +4,20 @@ import android.app.ActionBar;
 import android.app.Activity;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.ViewConfiguration;
 
+import com.firebase.client.Firebase;
+
 import java.lang.reflect.Field;
 
 public class MainActivity extends Activity implements GroupsFragment.OnGroupsInteractionListener {
 
+    private static final String FIREBASE_URL = "https://testda401a.firebaseio.com";
+    private Firebase firebase;
     private FragmentManager fragmentManager;
     protected ActionBar actionBar;
     private GroupsFragment groupsPage;
@@ -23,7 +28,7 @@ public class MainActivity extends Activity implements GroupsFragment.OnGroupsInt
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
+        firebase = new Firebase(FIREBASE_URL);
         actionBar = getActionBar();
 
         // Force the Overflow Menu to show even on phones with dedicated menu button
@@ -66,7 +71,18 @@ public class MainActivity extends Activity implements GroupsFragment.OnGroupsInt
             }
         }
 
+        else if(id == R.id.action_log_out){
+            logout();
+        }
+
         return super.onOptionsItemSelected(item);
+    }
+
+    private void logout(){
+        firebase.unauth();
+        Intent startIntent = new Intent(this, StartActivity.class);
+        this.startActivity(startIntent);
+        this.finish();
     }
 
     @Override
