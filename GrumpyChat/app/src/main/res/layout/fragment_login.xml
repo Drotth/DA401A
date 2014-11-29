@@ -38,7 +38,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:text="@string/login"
-        android:onClick="login" />
+        android:onClick="loginClick" />
 
     <Button
         android:id="@+id/regBtn1"
@@ -46,6 +46,6 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:text="@string/register"
-        android:onClick="register" />
+        android:onClick="registerClick" />
 
 </LinearLayout>

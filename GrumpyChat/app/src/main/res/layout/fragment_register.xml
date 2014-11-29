@@ -42,6 +42,6 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:text="@string/register"
-        android:onClick="register"/>
+        android:onClick="registerClick"/>
 
 </LinearLayout>
