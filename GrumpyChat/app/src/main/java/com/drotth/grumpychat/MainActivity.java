@@ -42,10 +42,10 @@ public class MainActivity extends Activity implements GroupsFragment.OnGroupsInt
             }
         } catch (Exception exc) {}
 
-        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
         groupsPage = new GroupsFragment();
-        fragmentTransaction.add(R.id.fragmentViewMain, groupsPage);
-        fragmentTransaction.commit();
+        fragmentManager.beginTransaction()
+                .add(R.id.fragmentViewMain, groupsPage)
+                .commit();
     }
 
     @Override
@@ -58,12 +58,12 @@ public class MainActivity extends Activity implements GroupsFragment.OnGroupsInt
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()){
             case R.id.action_about:
-                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
                 aboutPage = new AboutFragment();
-                fragmentTransaction.replace(R.id.fragmentViewMain, aboutPage);
-                fragmentTransaction.addToBackStack(null);
-                fragmentTransaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
-                fragmentTransaction.commit();
+                fragmentManager.beginTransaction()
+                        .replace(R.id.fragmentViewMain, aboutPage)
+                        .addToBackStack(null)
+                        .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
+                        .commit();
                 break;
 
             case R.id.action_log_out:
@@ -84,11 +84,11 @@ public class MainActivity extends Activity implements GroupsFragment.OnGroupsInt
 
     @Override
     public void onGroupClick(Group group) {
-        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
         chatPage = ChatFragment.newInstance(group);
-        fragmentTransaction.replace(R.id.fragmentViewMain, chatPage);
-        fragmentTransaction.addToBackStack(null);
-        fragmentTransaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
-        fragmentTransaction.commit();
+        fragmentManager.beginTransaction()
+                .replace(R.id.fragmentViewMain, chatPage)
+                .addToBackStack(null)
+                .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
+                .commit();
     }
 }

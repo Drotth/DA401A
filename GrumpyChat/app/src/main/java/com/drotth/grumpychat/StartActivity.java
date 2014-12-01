@@ -28,13 +28,12 @@ public class StartActivity extends Activity {
         setContentView(R.layout.activity_start);
         Firebase.setAndroidContext(this);
         firebase = new Firebase(FIREBASE_URL);
-
         fragmentManager = getFragmentManager();
-        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
 
         loginPage = new LoginFragment();
-        fragmentTransaction.add(R.id.fragmentViewStart, loginPage);
-        fragmentTransaction.commit();
+        fragmentManager.beginTransaction()
+                .add(R.id.fragmentViewStart, loginPage)
+                .commit();
     }
 
     public void loginClick(View view){
@@ -52,12 +51,12 @@ public class StartActivity extends Activity {
 
         if(id == R.id.regBtn1){
             if (registerPage == null || !registerPage.isAdded()){
-                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
                 registerPage = new RegisterFragment();
-                fragmentTransaction.replace(R.id.fragmentViewStart, registerPage);
-                fragmentTransaction.addToBackStack(null);
-                fragmentTransaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
-                fragmentTransaction.commit();
+                fragmentManager.beginTransaction()
+                        .replace(R.id.fragmentViewStart, registerPage)
+                        .addToBackStack(null)
+                        .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
+                        .commit();
             }
         }
         else if (id == R.id.regBtn2){
