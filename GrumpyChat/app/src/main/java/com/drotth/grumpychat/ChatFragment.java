@@ -8,12 +8,14 @@ import android.view.ViewGroup;
 
 public class ChatFragment extends Fragment {
 
-    private String groupName = "DEFAULT";
+    private String groupName = "Loading..";
+    private String groupID = "NULL";
 
-    public static ChatFragment newInstance(String groupName) {
+    public static ChatFragment newInstance(Group group) {
         ChatFragment fragment = new ChatFragment();
         Bundle args = new Bundle();
-        args.putString("groupName", groupName);
+        args.putString("groupName", group.getName());
+        args.putString("groupID", group.getId());
         fragment.setArguments(args);
         return fragment;
     }
@@ -26,6 +28,7 @@ public class ChatFragment extends Fragment {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
             groupName = getArguments().getString("groupName");
+            groupID = getArguments().getString("groupID");
         }
     }
 

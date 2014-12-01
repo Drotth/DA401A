@@ -21,7 +21,8 @@
         android:layout_gravity="center"
         android:layout_marginBottom="10dp"
         android:inputType="textEmailAddress"
-        android:hint="@string/email" />
+        android:hint="@string/email"
+        android:text="gctest@gmail.com"/>
 
     <EditText
         android:id="@+id/passwordFieldLogin"
@@ -30,7 +31,8 @@
         android:layout_gravity="center"
         android:layout_marginBottom="10dp"
         android:inputType="textPassword"
-        android:hint="@string/password" />
+        android:hint="@string/password"
+        android:text="gcpass"/>
 
     <Button
         android:id="@+id/loginBtn"
@@ -47,5 +49,17 @@
         android:layout_gravity="center"
         android:text="@string/register"
         android:onClick="registerClick" />
+
+    <RelativeLayout
+        android:id="@+id/loadingPanelLogin"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center" >
+
+        <ProgressBar
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:indeterminate="false"/>
+    </RelativeLayout>
 
 </LinearLayout>

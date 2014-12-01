@@ -1,6 +1,7 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools" tools:context=".MainActivity">
 
+    <!-- TODO: styling/selector/feedback for menu buttons -->
     <item android:id="@+id/action_about"
         android:title="@string/about"
         android:orderInCategory="1"
@@ -8,7 +9,13 @@
 
     <item android:id="@+id/action_log_out"
         android:title="@string/log_out"
-        android:orderInCategory="2"
+        android:orderInCategory="3"
         android:showAsAction="never" />
+
+    <item android:id="@+id/action_new_group"
+        android:icon="@drawable/ic_action_new"
+        android:title="@string/new_group"
+        android:orderInCategory="2"
+        android:showAsAction="ifRoom" />
 
 </menu>

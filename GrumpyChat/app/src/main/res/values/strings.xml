@@ -22,5 +22,6 @@
     <string name="log_out">Log out</string>
     <string name="about">About</string>
     <string name="groups">Groups</string>
+    <string name="new_group">New group</string>
 
 </resources>

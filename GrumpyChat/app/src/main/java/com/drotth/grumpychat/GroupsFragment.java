@@ -8,14 +8,23 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.ListAdapter;
 import android.widget.ListView;
+
+import com.firebase.client.ChildEventListener;
+import com.firebase.client.DataSnapshot;
+import com.firebase.client.Firebase;
+import com.firebase.client.FirebaseError;
+
+import java.util.ArrayList;
 
 public class GroupsFragment extends Fragment implements ListView.OnItemClickListener{
 
+    private static final String FIREBASE_URL = "https://testda401a.firebaseio.com";
+    private Firebase firebase;
     private ListView groupsList;
-    private ListAdapter listAdapter;
+    private ArrayAdapter<Group> groupListAdapter;
     private OnGroupsInteractionListener listListener;
+    private ArrayList<Group> groups = new ArrayList<Group>();
 
     //Placeholder group list names
     String[] temp_groups = {"Project P2", "Exam work", "DA401A team", "Family", "My cats control me"};
@@ -23,8 +32,29 @@ public class GroupsFragment extends Fragment implements ListView.OnItemClickList
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        listAdapter = new ArrayAdapter<String>(getActivity(),
-                android.R.layout.simple_list_item_1, temp_groups);
+        firebase = new Firebase(FIREBASE_URL);
+
+        groupListAdapter = new ArrayAdapter<Group>(getActivity(),
+                android.R.layout.simple_list_item_1, groups);
+
+        firebase.child("groups").addChildEventListener(new ChildEventListener() {
+            @Override
+            public void onChildAdded(DataSnapshot snapshot, String previousChildName) {
+                groupListAdapter.add(new Group(snapshot.getName(), (String) snapshot.getValue()));
+            }
+
+            @Override
+            public void onChildChanged(DataSnapshot snapshot, String s) {}
+
+            @Override
+            public void onChildRemoved(DataSnapshot snapshot) {}
+
+            @Override
+            public void onChildMoved(DataSnapshot snapshot, String previousChildName) {}
+
+            @Override
+            public void onCancelled(FirebaseError firebaseError) {}
+        });
     }
 
     @Override
@@ -33,7 +63,7 @@ public class GroupsFragment extends Fragment implements ListView.OnItemClickList
         View view = inflater.inflate(R.layout.fragment_groups, container, false);
 
         groupsList = (ListView) view.findViewById(R.id.groupsListView);
-        groupsList.setAdapter(listAdapter);
+        groupsList.setAdapter(groupListAdapter);
         groupsList.setOnItemClickListener(this);
 
         return view;
@@ -60,11 +90,11 @@ public class GroupsFragment extends Fragment implements ListView.OnItemClickList
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
         if (listListener != null) {
-            listListener.onGroupClick((String) parent.getItemAtPosition(position));
+            listListener.onGroupClick(groupListAdapter.getItem(position));
         }
     }
 
     public interface OnGroupsInteractionListener {
-        public void onGroupClick(String groupName);
+        public void onGroupClick(Group group);
     }
 }

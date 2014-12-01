@@ -30,6 +30,7 @@ public class MainActivity extends Activity implements GroupsFragment.OnGroupsInt
         setContentView(R.layout.activity_main);
         firebase = new Firebase(FIREBASE_URL);
         actionBar = getActionBar();
+        fragmentManager = getFragmentManager();
 
         // Force the Overflow Menu to show even on phones with dedicated menu button
         try {
@@ -41,9 +42,7 @@ public class MainActivity extends Activity implements GroupsFragment.OnGroupsInt
             }
         } catch (Exception exc) {}
 
-        fragmentManager = getFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-
         groupsPage = new GroupsFragment();
         fragmentTransaction.add(R.id.fragmentViewMain, groupsPage);
         fragmentTransaction.commit();
@@ -57,38 +56,36 @@ public class MainActivity extends Activity implements GroupsFragment.OnGroupsInt
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        int id = item.getItemId();
-
-        if (id == R.id.action_about) {
-            if (aboutPage == null || !aboutPage.isAdded()){
+        switch (item.getItemId()){
+            case R.id.action_about:
                 FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
                 aboutPage = new AboutFragment();
                 fragmentTransaction.replace(R.id.fragmentViewMain, aboutPage);
                 fragmentTransaction.addToBackStack(null);
                 fragmentTransaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
                 fragmentTransaction.commit();
-                return true;
-            }
-        }
+                break;
 
-        else if(id == R.id.action_log_out){
-            logout();
+            case R.id.action_log_out:
+                firebase.unauth();
+                Intent startIntent = new Intent(this, StartActivity.class);
+                this.startActivity(startIntent);
+                this.finish();
+                break;
+
+            case R.id.action_new_group:
+                //create new group
+                // TODO: should the groupfragment or the mainactivity have the groups?
+                break;
         }
 
         return super.onOptionsItemSelected(item);
     }
 
-    private void logout(){
-        firebase.unauth();
-        Intent startIntent = new Intent(this, StartActivity.class);
-        this.startActivity(startIntent);
-        this.finish();
-    }
-
     @Override
-    public void onGroupClick(String groupName) {
+    public void onGroupClick(Group group) {
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-        chatPage = ChatFragment.newInstance(groupName);
+        chatPage = ChatFragment.newInstance(group);
         fragmentTransaction.replace(R.id.fragmentViewMain, chatPage);
         fragmentTransaction.addToBackStack(null);
         fragmentTransaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);

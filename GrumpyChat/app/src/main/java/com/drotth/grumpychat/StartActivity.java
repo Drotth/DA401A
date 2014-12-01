@@ -77,6 +77,10 @@ public class StartActivity extends Activity {
         }
 
         else{
+            findViewById(R.id.loginBtn).setVisibility(View.GONE);
+            findViewById(R.id.regBtn1).setVisibility(View.GONE);
+            findViewById(R.id.loadingPanelLogin).setVisibility(View.VISIBLE);
+
             firebase.authWithPassword(email, password, new Firebase.AuthResultHandler() {
                 @Override
                 public void onAuthenticated(AuthData authData) {
@@ -86,7 +90,19 @@ public class StartActivity extends Activity {
                 }
                 @Override
                 public void onAuthenticationError(FirebaseError error) {
-                    Toast.makeText(getApplicationContext(), "Login unsuccessful", Toast.LENGTH_SHORT).show();
+                    findViewById(R.id.loadingPanelLogin).setVisibility(View.GONE);
+                    findViewById(R.id.loginBtn).setVisibility(View.VISIBLE);
+                    findViewById(R.id.regBtn1).setVisibility(View.VISIBLE);
+
+                    switch (error.getCode()) {
+                        case FirebaseError.INVALID_PASSWORD:
+                            Toast.makeText(getApplicationContext(),"Invalid password", Toast.LENGTH_SHORT).show();
+                            break;
+
+                        default:
+                            Toast.makeText(getApplicationContext(), "Login unsuccessful", Toast.LENGTH_SHORT).show();
+                            break;
+                    }
                 }
             });
         }
@@ -98,6 +114,9 @@ public class StartActivity extends Activity {
         }
 
         else {
+            findViewById(R.id.regBtn2).setVisibility(View.GONE);
+            findViewById(R.id.loadingPanelReg).setVisibility(View.VISIBLE);
+
             firebase.createUser(email, password, new Firebase.ResultHandler() {
                 @Override
                 public void onSuccess() {
@@ -105,8 +124,19 @@ public class StartActivity extends Activity {
                 }
 
                 @Override
-                public void onError(FirebaseError firebaseError) {
-                    Toast.makeText(getApplicationContext(),"Registration unsuccessful", Toast.LENGTH_SHORT).show();
+                public void onError(FirebaseError error) {
+                    findViewById(R.id.loadingPanelReg).setVisibility(View.GONE);
+                    findViewById(R.id.regBtn2).setVisibility(View.VISIBLE);
+
+                    switch (error.getCode()) {
+                        case FirebaseError.EMAIL_TAKEN:
+                            Toast.makeText(getApplicationContext(),"Email already exists", Toast.LENGTH_SHORT).show();
+                            break;
+
+                        default:
+                            Toast.makeText(getApplicationContext(),"Registration unsuccessful", Toast.LENGTH_SHORT).show();
+                            break;
+                    }
                 }
             });
         }
