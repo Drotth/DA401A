@@ -8,11 +8,15 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.view.ViewConfiguration;
+import android.widget.EditText;
 
 import com.firebase.client.Firebase;
 
 import java.lang.reflect.Field;
+import java.util.HashMap;
+import java.util.Map;
 
 public class MainActivity extends Activity implements GroupsFragment.OnGroupsInteractionListener {
 
@@ -90,5 +94,17 @@ public class MainActivity extends Activity implements GroupsFragment.OnGroupsInt
                 .addToBackStack(null)
                 .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
                 .commit();
+    }
+
+    public void sendMessage(View view){
+        Map<String, Object> chatMessages = new HashMap<String, Object>();
+        String id = firebase.child("-JSNsbdjj" + "/messages").push().getName();
+        //String id = firebase.push().getName();
+        EditText chatInput = (EditText) findViewById(R.id.chatInputField);
+        String message = chatInput.getText().toString();
+
+        ChatMessage cm = new ChatMessage(id, "myself", message, "XXXX-XX-XX XX:XX");
+        chatMessages.put(id, cm);
+        firebase.updateChildren(chatMessages);
     }
 }

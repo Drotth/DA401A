@@ -5,7 +5,7 @@
     android:orientation="vertical">
 
         <ListView
-            android:id="@+id/ChatFlow"
+            android:id="@+id/chatFlow"
             android:layout_weight="1"
             android:layout_width="fill_parent"
             android:layout_height="0dp"/>
@@ -18,18 +18,21 @@
         android:baselineAligned="true">
 
         <EditText
-            android:id="@+id/ChatInputField"
+            android:id="@+id/chatInputField"
             android:layout_weight="1"
             android:layout_height="50dp"
             android:layout_width="0dip">
             <requestFocus></requestFocus>
             </EditText>
 
+        <!-- buttons need a default selector, maybe a custom for this button -->
         <Button
-            android:id="@+id/SendBtn"
+            android:id="@+id/sendBtn"
             android:layout_height="50dp"
             android:layout_width="100dp"
-            android:text="@string/send"/>
+            android:background="@color/white"
+            android:text="@string/send"
+            android:onClick="sendMessage"/>
 
         </LinearLayout>
 

@@ -37,10 +37,10 @@ public class GroupsFragment extends Fragment implements ListView.OnItemClickList
         groupListAdapter = new ArrayAdapter<Group>(getActivity(),
                 android.R.layout.simple_list_item_1, groups);
 
-        firebase.child("groups").addChildEventListener(new ChildEventListener() {
+        firebase.addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(DataSnapshot snapshot, String previousChildName) {
-                groupListAdapter.add(new Group(snapshot.getName(), (String) snapshot.getValue()));
+                groupListAdapter.add(new Group(snapshot.getName(), (String) snapshot.child("name").getValue()));
             }
 
             @Override
