@@ -2,7 +2,6 @@ package com.drotth.grumpychat;
 
 import android.app.Activity;
 import android.app.FragmentManager;
-import android.app.FragmentTransaction;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -15,8 +14,6 @@ import com.firebase.client.FirebaseError;
 
 public class StartActivity extends Activity {
 
-    //remember to change this to da401a before demo
-    private static final String FIREBASE_URL = "https://testda401a.firebaseio.com";
     private Firebase firebase;
     private FragmentManager fragmentManager;
     private LoginFragment loginPage;
@@ -27,52 +24,61 @@ public class StartActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_start);
         Firebase.setAndroidContext(this);
-        firebase = new Firebase(FIREBASE_URL);
+        firebase = new Firebase((String)getResources().getText(R.string.firebase_url));
         fragmentManager = getFragmentManager();
 
         loginPage = new LoginFragment();
         fragmentManager.beginTransaction()
+                .setCustomAnimations(android.R.animator.fade_in, android.R.animator.fade_out,
+                        android.R.animator.fade_in, android.R.animator.fade_out)
                 .add(R.id.fragmentViewStart, loginPage)
                 .commit();
     }
 
-    public void loginClick(View view){
-        EditText emailInsert = (EditText) findViewById(R.id.emailFieldLogin);
-        String email = emailInsert.getText().toString();
+    public void onClick(View view){
+        EditText emailInsert, passInsert;
+        String email, password;
 
-        EditText passInsert = (EditText) findViewById(R.id.passwordFieldLogin);
-        String password = passInsert.getText().toString();
+        switch (view.getId()){
+            case R.id.loginBtn:
+                emailInsert = (EditText) findViewById(R.id.emailFieldLogin);
+                email = emailInsert.getText().toString();
 
-        login(email, password);
-    }
+                passInsert = (EditText) findViewById(R.id.passwordFieldLogin);
+                password = passInsert.getText().toString();
 
-    public void registerClick(View view){
-        int id = view.getId();
+                login(email, password);
+                break;
 
-        if(id == R.id.regBtn1){
-            if (registerPage == null || !registerPage.isAdded()){
-                registerPage = new RegisterFragment();
-                fragmentManager.beginTransaction()
-                        .replace(R.id.fragmentViewStart, registerPage)
-                        .addToBackStack(null)
-                        .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
-                        .commit();
-            }
-        }
-        else if (id == R.id.regBtn2){
-            EditText emailInsert = (EditText) findViewById(R.id.emailFieldReg);
-            String email = emailInsert.getText().toString();
+            case R.id.regBtn1:
+                if (registerPage == null || !registerPage.isAdded()){
+                    registerPage = new RegisterFragment();
+                    fragmentManager.beginTransaction()
+                            .setCustomAnimations(android.R.animator.fade_in, android.R.animator.fade_out,
+                                    android.R.animator.fade_in, android.R.animator.fade_out)
+                            .replace(R.id.fragmentViewStart, registerPage)
+                            .addToBackStack(null)
+                            // TODO: for VG, is it .setTransition or .setCustomAnimations?
+                            //.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
+                            .commit();
+                }
+                break;
 
-            EditText passInsert = (EditText) findViewById(R.id.passwordFieldReg);
-            String password = passInsert.getText().toString();
+            case R.id.regBtn2:
+                emailInsert = (EditText) findViewById(R.id.emailFieldReg);
+                email = emailInsert.getText().toString();
 
-            register(email, password);
+                passInsert = (EditText) findViewById(R.id.passwordFieldReg);
+                password = passInsert.getText().toString();
+
+                register(email, password);
+                break;
         }
     }
 
     private void login(String email, String password){
         if (email.isEmpty() || password.isEmpty()) {
-            Toast.makeText(getApplicationContext(), "Enter both email and password", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getApplicationContext(), R.string.enter_both, Toast.LENGTH_SHORT).show();
         }
 
         else{
@@ -95,11 +101,11 @@ public class StartActivity extends Activity {
 
                     switch (error.getCode()) {
                         case FirebaseError.INVALID_PASSWORD:
-                            Toast.makeText(getApplicationContext(),"Invalid password", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(getApplicationContext(), R.string.invalid_pass, Toast.LENGTH_SHORT).show();
                             break;
 
                         default:
-                            Toast.makeText(getApplicationContext(), "Login unsuccessful", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(getApplicationContext(), R.string.login_unsuccessful, Toast.LENGTH_SHORT).show();
                             break;
                     }
                 }
@@ -109,7 +115,7 @@ public class StartActivity extends Activity {
 
     public void register(final String email, final String password){
         if (email.isEmpty() || password.isEmpty()) {
-            Toast.makeText(getApplicationContext(), "Enter both email and password", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getApplicationContext(), R.string.enter_both, Toast.LENGTH_SHORT).show();
         }
 
         else {
@@ -129,11 +135,11 @@ public class StartActivity extends Activity {
 
                     switch (error.getCode()) {
                         case FirebaseError.EMAIL_TAKEN:
-                            Toast.makeText(getApplicationContext(),"Email already exists", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(getApplicationContext(), R.string.email_taken, Toast.LENGTH_SHORT).show();
                             break;
 
                         default:
-                            Toast.makeText(getApplicationContext(),"Registration unsuccessful", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(getApplicationContext(), R.string.reg_unsuccessful, Toast.LENGTH_SHORT).show();
                             break;
                     }
                 }

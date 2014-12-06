@@ -3,6 +3,7 @@
 
     <!-- General -->
     <string name="app_name">GrumpyChat</string>
+    <string name="firebase_url">https://testda401a.firebaseio.com</string>
 
     <!-- Start activity -->
     <string name="email">Email</string>
@@ -23,5 +24,13 @@
     <string name="about">About</string>
     <string name="groups">Groups</string>
     <string name="new_group">New group</string>
+
+    <!-- Error messages -->
+    <string name="enter_both">Enter both email and password</string>
+    <string name="login_unsuccessful">Login unsuccessful</string>
+    <string name="email_taken">Email already exists</string>
+    <string name="reg_unsuccessful">Registration unsuccessful</string>
+    <string name="invalid_pass">Invalid password</string>
+    <string name="name_unvalid">Name is unvalid</string>
 
 </resources>

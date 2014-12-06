@@ -40,7 +40,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:text="@string/login"
-        android:onClick="loginClick" />
+        android:onClick="onClick" />
 
     <Button
         android:id="@+id/regBtn1"
@@ -48,7 +48,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:text="@string/register"
-        android:onClick="registerClick" />
+        android:onClick="onClick" />
 
     <RelativeLayout
         android:id="@+id/loadingPanelLogin"

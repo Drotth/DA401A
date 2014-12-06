@@ -12,10 +12,4 @@
         android:orderInCategory="3"
         android:showAsAction="never" />
 
-    <item android:id="@+id/action_new_group"
-        android:icon="@drawable/ic_action_new"
-        android:title="@string/new_group"
-        android:orderInCategory="2"
-        android:showAsAction="ifRoom" />
-
 </menu>

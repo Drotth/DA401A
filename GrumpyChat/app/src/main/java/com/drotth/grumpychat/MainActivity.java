@@ -3,24 +3,18 @@ package com.drotth.grumpychat;
 import android.app.ActionBar;
 import android.app.Activity;
 import android.app.FragmentManager;
-import android.app.FragmentTransaction;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
 import android.view.ViewConfiguration;
-import android.widget.EditText;
 
 import com.firebase.client.Firebase;
 
 import java.lang.reflect.Field;
-import java.util.HashMap;
-import java.util.Map;
 
-public class MainActivity extends Activity implements GroupsFragment.OnGroupsInteractionListener {
+public class MainActivity extends Activity implements GroupsFragment.GroupsInteractionListener {
 
-    private static final String FIREBASE_URL = "https://testda401a.firebaseio.com";
     private Firebase firebase;
     private FragmentManager fragmentManager;
     protected ActionBar actionBar;
@@ -32,7 +26,7 @@ public class MainActivity extends Activity implements GroupsFragment.OnGroupsInt
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        firebase = new Firebase(FIREBASE_URL);
+        firebase = new Firebase((String)getResources().getText(R.string.firebase_url));
         actionBar = getActionBar();
         fragmentManager = getFragmentManager();
 
@@ -48,6 +42,8 @@ public class MainActivity extends Activity implements GroupsFragment.OnGroupsInt
 
         groupsPage = new GroupsFragment();
         fragmentManager.beginTransaction()
+                .setCustomAnimations(android.R.animator.fade_in, android.R.animator.fade_out,
+                        android.R.animator.fade_in, android.R.animator.fade_out)
                 .add(R.id.fragmentViewMain, groupsPage)
                 .commit();
     }
@@ -64,9 +60,11 @@ public class MainActivity extends Activity implements GroupsFragment.OnGroupsInt
             case R.id.action_about:
                 aboutPage = new AboutFragment();
                 fragmentManager.beginTransaction()
+                        .setCustomAnimations(android.R.animator.fade_in, android.R.animator.fade_out,
+                                android.R.animator.fade_in, android.R.animator.fade_out)
                         .replace(R.id.fragmentViewMain, aboutPage)
                         .addToBackStack(null)
-                        .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
+                        //.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
                         .commit();
                 break;
 
@@ -75,11 +73,6 @@ public class MainActivity extends Activity implements GroupsFragment.OnGroupsInt
                 Intent startIntent = new Intent(this, StartActivity.class);
                 this.startActivity(startIntent);
                 this.finish();
-                break;
-
-            case R.id.action_new_group:
-                //create new group
-                // TODO: should the groupfragment or the mainactivity have the groups?
                 break;
         }
 
@@ -90,21 +83,11 @@ public class MainActivity extends Activity implements GroupsFragment.OnGroupsInt
     public void onGroupClick(Group group) {
         chatPage = ChatFragment.newInstance(group);
         fragmentManager.beginTransaction()
+                .setCustomAnimations(android.R.animator.fade_in, android.R.animator.fade_out,
+                        android.R.animator.fade_in, android.R.animator.fade_out)
                 .replace(R.id.fragmentViewMain, chatPage)
                 .addToBackStack(null)
-                .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
+                //.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
                 .commit();
-    }
-
-    public void sendMessage(View view){
-        Map<String, Object> chatMessages = new HashMap<String, Object>();
-        String id = firebase.child("-JSNsbdjj" + "/messages").push().getName();
-        //String id = firebase.push().getName();
-        EditText chatInput = (EditText) findViewById(R.id.chatInputField);
-        String message = chatInput.getText().toString();
-
-        ChatMessage cm = new ChatMessage(id, "myself", message, "XXXX-XX-XX XX:XX");
-        chatMessages.put(id, cm);
-        firebase.updateChildren(chatMessages);
     }
 }

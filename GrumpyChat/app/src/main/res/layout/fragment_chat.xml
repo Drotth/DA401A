@@ -8,7 +8,9 @@
             android:id="@+id/chatFlow"
             android:layout_weight="1"
             android:layout_width="fill_parent"
-            android:layout_height="0dp"/>
+            android:layout_height="0dp"
+            android:divider="@android:color/transparent"
+            android:dividerHeight="6dp"/>
 
     <LinearLayout
         android:layout_width="fill_parent"
@@ -31,8 +33,7 @@
             android:layout_height="50dp"
             android:layout_width="100dp"
             android:background="@color/white"
-            android:text="@string/send"
-            android:onClick="sendMessage"/>
+            android:text="@string/send"/>
 
         </LinearLayout>
 
