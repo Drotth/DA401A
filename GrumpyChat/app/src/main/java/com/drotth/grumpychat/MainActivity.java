@@ -87,7 +87,6 @@ public class MainActivity extends Activity implements GroupsFragment.GroupsInter
                         android.R.animator.fade_in, android.R.animator.fade_out)
                 .replace(R.id.fragmentViewMain, chatPage)
                 .addToBackStack(null)
-                //.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
                 .commit();
     }
 }

@@ -79,71 +79,69 @@ public class StartActivity extends Activity {
     private void login(String email, String password){
         if (email.isEmpty() || password.isEmpty()) {
             Toast.makeText(getApplicationContext(), R.string.enter_both, Toast.LENGTH_SHORT).show();
+            return;
         }
 
-        else{
-            findViewById(R.id.loginBtn).setVisibility(View.GONE);
-            findViewById(R.id.regBtn1).setVisibility(View.GONE);
-            findViewById(R.id.loadingPanelLogin).setVisibility(View.VISIBLE);
+        findViewById(R.id.loginBtn).setVisibility(View.GONE);
+        findViewById(R.id.regBtn1).setVisibility(View.GONE);
+        findViewById(R.id.loadingPanelLogin).setVisibility(View.VISIBLE);
 
-            firebase.authWithPassword(email, password, new Firebase.AuthResultHandler() {
-                @Override
-                public void onAuthenticated(AuthData authData) {
-                    Intent mainIntent = new Intent(StartActivity.this, MainActivity.class);
-                    StartActivity.this.startActivity(mainIntent);
-                    StartActivity.this.finish();
+        firebase.authWithPassword(email, password, new Firebase.AuthResultHandler() {
+            @Override
+            public void onAuthenticated(AuthData authData) {
+                Intent mainIntent = new Intent(StartActivity.this, MainActivity.class);
+                StartActivity.this.startActivity(mainIntent);
+                StartActivity.this.finish();
+            }
+            @Override
+            public void onAuthenticationError(FirebaseError error) {
+                findViewById(R.id.loadingPanelLogin).setVisibility(View.GONE);
+                findViewById(R.id.loginBtn).setVisibility(View.VISIBLE);
+                findViewById(R.id.regBtn1).setVisibility(View.VISIBLE);
+
+                switch (error.getCode()) {
+                    case FirebaseError.INVALID_PASSWORD:
+                        Toast.makeText(getApplicationContext(), R.string.invalid_pass, Toast.LENGTH_SHORT).show();
+                        break;
+
+                    default:
+                        Toast.makeText(getApplicationContext(), R.string.login_unsuccessful, Toast.LENGTH_SHORT).show();
+                        break;
                 }
-                @Override
-                public void onAuthenticationError(FirebaseError error) {
-                    findViewById(R.id.loadingPanelLogin).setVisibility(View.GONE);
-                    findViewById(R.id.loginBtn).setVisibility(View.VISIBLE);
-                    findViewById(R.id.regBtn1).setVisibility(View.VISIBLE);
-
-                    switch (error.getCode()) {
-                        case FirebaseError.INVALID_PASSWORD:
-                            Toast.makeText(getApplicationContext(), R.string.invalid_pass, Toast.LENGTH_SHORT).show();
-                            break;
-
-                        default:
-                            Toast.makeText(getApplicationContext(), R.string.login_unsuccessful, Toast.LENGTH_SHORT).show();
-                            break;
-                    }
-                }
-            });
-        }
+            }
+        });
     }
 
-    public void register(final String email, final String password){
+    private void register(final String email, final String password){
         if (email.isEmpty() || password.isEmpty()) {
             Toast.makeText(getApplicationContext(), R.string.enter_both, Toast.LENGTH_SHORT).show();
+            return;
         }
 
-        else {
-            findViewById(R.id.regBtn2).setVisibility(View.GONE);
-            findViewById(R.id.loadingPanelReg).setVisibility(View.VISIBLE);
+        findViewById(R.id.regBtn2).setVisibility(View.GONE);
+        findViewById(R.id.loadingPanelReg).setVisibility(View.VISIBLE);
 
-            firebase.createUser(email, password, new Firebase.ResultHandler() {
-                @Override
-                public void onSuccess() {
-                    StartActivity.this.login(email, password);
+        firebase.createUser(email, password, new Firebase.ResultHandler() {
+            @Override
+            public void onSuccess() {
+                StartActivity.this.login(email, password);
+            }
+
+            @Override
+            public void onError(FirebaseError error) {
+                findViewById(R.id.loadingPanelReg).setVisibility(View.GONE);
+                findViewById(R.id.regBtn2).setVisibility(View.VISIBLE);
+
+                switch (error.getCode()) {
+                    case FirebaseError.EMAIL_TAKEN:
+                        Toast.makeText(getApplicationContext(), R.string.email_taken, Toast.LENGTH_SHORT).show();
+                        break;
+
+                    default:
+                        Toast.makeText(getApplicationContext(), R.string.reg_unsuccessful, Toast.LENGTH_SHORT).show();
+                        break;
                 }
-
-                @Override
-                public void onError(FirebaseError error) {
-                    findViewById(R.id.loadingPanelReg).setVisibility(View.GONE);
-                    findViewById(R.id.regBtn2).setVisibility(View.VISIBLE);
-
-                    switch (error.getCode()) {
-                        case FirebaseError.EMAIL_TAKEN:
-                            Toast.makeText(getApplicationContext(), R.string.email_taken, Toast.LENGTH_SHORT).show();
-                            break;
-
-                        default:
-                            Toast.makeText(getApplicationContext(), R.string.reg_unsuccessful, Toast.LENGTH_SHORT).show();
-                            break;
-                    }
-                }
-            });
-        }
+            }
+        });
     }
 }

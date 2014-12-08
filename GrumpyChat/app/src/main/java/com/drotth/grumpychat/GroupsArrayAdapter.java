@@ -1,10 +1,10 @@
 package com.drotth.grumpychat;
 
 import android.content.Context;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.Gravity;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
@@ -12,12 +12,12 @@ import com.firebase.client.Firebase;
 
 import java.util.ArrayList;
 
-public class ChatsArrayAdapter<Object> extends ArrayAdapter<Object> {
+public class GroupsArrayAdapter<Object> extends ArrayAdapter<Object> {
 
     private final Context context;
     private final ArrayList<Object> values;
 
-    public ChatsArrayAdapter(Context context, ArrayList<Object> values) {
+    public GroupsArrayAdapter(Context context, ArrayList<Object> values) {
         super(context, R.layout.chats_item, values);
         this.context = context;
         this.values = values;

@@ -50,17 +50,13 @@ public class GroupsFragment extends Fragment implements ListView.OnItemClickList
             public void onChildChanged(DataSnapshot snapshot, String s) {}
 
             @Override
-            public void onChildRemoved(DataSnapshot snapshot) {
-                //TODO: handle groups removed
-            }
+            public void onChildRemoved(DataSnapshot snapshot) {}
 
             @Override
             public void onChildMoved(DataSnapshot snapshot, String previousChildName) {}
 
             @Override
-            public void onCancelled(FirebaseError firebaseError) {
-                //TODO: Handle firebase errors
-            }
+            public void onCancelled(FirebaseError firebaseError) {}
         });
     }
 

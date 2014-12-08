@@ -32,5 +32,6 @@
     <string name="reg_unsuccessful">Registration unsuccessful</string>
     <string name="invalid_pass">Invalid password</string>
     <string name="name_unvalid">Name is unvalid</string>
+    <string name="message_empty">Message is empty</string>
 
 </resources>

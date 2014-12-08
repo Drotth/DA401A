@@ -30,8 +30,7 @@
             android:layout_height="50dp"
             android:layout_width="100dp"
             android:background="@color/white"
-            android:text="@string/new_group"
-            android:onClick="sendMessage"/>
+            android:text="@string/new_group"/>
 
     </LinearLayout>
 
