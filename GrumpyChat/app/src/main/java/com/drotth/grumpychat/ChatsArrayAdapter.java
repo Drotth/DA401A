@@ -44,4 +44,41 @@ public class ChatsArrayAdapter<Object> extends ArrayAdapter<Object> {
         }
         return view;
     }
+
+    //TODO: Makes scrolling much smoother but the text positioning doesn't work.
+//    public View getView(int position, View convertView, ViewGroup parent) {
+//        ViewHolder viewHolder = new ViewHolder();
+//
+//        if (convertView == null){
+//            LayoutInflater inflater = (LayoutInflater) context
+//                    .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+//
+//            convertView = inflater.inflate(R.layout.chats_item, parent, false);
+//            viewHolder.text = (TextView) convertView.findViewById(R.id.Msg);
+//            viewHolder.timeFrom = (TextView) convertView.findViewById(R.id.MsgTimeFrom);
+//
+//            convertView.setTag(viewHolder);
+//        }
+//        else{
+//            viewHolder = (ViewHolder) convertView.getTag();
+//        }
+//
+//        viewHolder.text.setText(((ChatMessage)values.get(position)).getMessage());
+//        viewHolder.timeFrom.setText(((ChatMessage)values.get(position)).getFrom() + ", " +
+//                ((ChatMessage)values.get(position)).getTimestamp());
+//
+//        Firebase firebase = new Firebase((String) context.getResources().getText(R.string.firebase_url));
+//        String user = firebase.getAuth().getProviderData().get("email").toString();
+//
+//        if( ((ChatMessage)values.get(position)).getFrom().equals(user) ) {
+//            viewHolder.text.setGravity(Gravity.END);
+//            viewHolder.timeFrom.setGravity(Gravity.END);
+//        }
+//        return convertView;
+//    }
+//
+//    static class ViewHolder {
+//        TextView text;
+//        TextView timeFrom;
+//    }
 }

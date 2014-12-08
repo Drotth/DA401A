@@ -13,7 +13,7 @@ import com.firebase.client.Firebase;
 
 import java.lang.reflect.Field;
 
-public class MainActivity extends Activity implements GroupsFragment.GroupsInteractionListener {
+public class MainActivity extends Activity {
 
     private Firebase firebase;
     private FragmentManager fragmentManager;
@@ -64,7 +64,6 @@ public class MainActivity extends Activity implements GroupsFragment.GroupsInter
                                 android.R.animator.fade_in, android.R.animator.fade_out)
                         .replace(R.id.fragmentViewMain, aboutPage)
                         .addToBackStack(null)
-                        //.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
                         .commit();
                 break;
 
@@ -79,7 +78,6 @@ public class MainActivity extends Activity implements GroupsFragment.GroupsInter
         return super.onOptionsItemSelected(item);
     }
 
-    @Override
     public void onGroupClick(Group group) {
         chatPage = ChatFragment.newInstance(group);
         fragmentManager.beginTransaction()

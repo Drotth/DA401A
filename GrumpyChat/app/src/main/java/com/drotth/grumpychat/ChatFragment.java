@@ -22,13 +22,13 @@ import java.util.Map;
 
 public class ChatFragment extends Fragment implements Button.OnClickListener {
 
+    private View view;
     private String groupName = "Loading..";
     private String groupID = "NULL";
     private Firebase firebase;
     private ListView chatsList;
     private ChatsArrayAdapter<ChatMessage> chatsListAdapter;
     private ArrayList<ChatMessage> chats = new ArrayList<ChatMessage>();
-    private View view;
 
     public static ChatFragment newInstance(Group group) {
         ChatFragment fragment = new ChatFragment();
@@ -67,21 +67,16 @@ public class ChatFragment extends Fragment implements Button.OnClickListener {
             }
 
             @Override
-            public void onChildChanged(DataSnapshot snapshot, String s) {
-            }
+            public void onChildChanged(DataSnapshot snapshot, String s) {}
 
             @Override
-            public void onChildRemoved(DataSnapshot snapshot) {
-            }
+            public void onChildRemoved(DataSnapshot snapshot) {}
 
             @Override
-            public void onChildMoved(DataSnapshot snapshot, String previousChildName) {
-            }
+            public void onChildMoved(DataSnapshot snapshot, String previousChildName) {}
 
             @Override
-            public void onCancelled(FirebaseError firebaseError) {
-                //TODO: handle firebase errors
-            }
+            public void onCancelled(FirebaseError firebaseError) {}
         });
     }
 

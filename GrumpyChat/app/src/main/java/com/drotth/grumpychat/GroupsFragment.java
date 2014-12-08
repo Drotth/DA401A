@@ -1,6 +1,5 @@
 package com.drotth.grumpychat;
 
-import android.app.Activity;
 import android.os.Bundle;
 import android.app.Fragment;
 import android.view.LayoutInflater;
@@ -28,7 +27,6 @@ public class GroupsFragment extends Fragment implements ListView.OnItemClickList
     private ListView groupsList;
     private ArrayAdapter<Group> groupListAdapter;
     private ArrayList<Group> groups;
-    private GroupsInteractionListener listListener;
     private View view;
 
     @Override
@@ -81,18 +79,6 @@ public class GroupsFragment extends Fragment implements ListView.OnItemClickList
     }
 
     @Override
-    public void onAttach(Activity activity) {
-        super.onAttach(activity);
-        listListener = (GroupsInteractionListener) activity;
-    }
-
-    @Override
-    public void onDetach() {
-        super.onDetach();
-        listListener = null;
-    }
-
-    @Override
     public void onClick(View v){
         EditText groupNameInput = (EditText) view.findViewById(R.id.editText_new_group);
         String groupName = groupNameInput.getText().toString();
@@ -114,12 +100,6 @@ public class GroupsFragment extends Fragment implements ListView.OnItemClickList
 
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-        if (listListener != null) {
-            listListener.onGroupClick(groupListAdapter.getItem(position));
-        }
-    }
-
-    public interface GroupsInteractionListener {
-        public void onGroupClick(Group group);
+        ((MainActivity) getActivity()).onGroupClick(groupListAdapter.getItem(position));
     }
 }

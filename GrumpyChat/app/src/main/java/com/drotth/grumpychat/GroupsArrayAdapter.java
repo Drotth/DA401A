@@ -1,14 +1,11 @@
 package com.drotth.grumpychat;
 
 import android.content.Context;
-import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
-
-import com.firebase.client.Firebase;
 
 import java.util.ArrayList;
 
@@ -18,7 +15,7 @@ public class GroupsArrayAdapter<Object> extends ArrayAdapter<Object> {
     private final ArrayList<Object> values;
 
     public GroupsArrayAdapter(Context context, ArrayList<Object> values) {
-        super(context, R.layout.chats_item, values);
+        super(context, android.R.layout.simple_list_item_1, values);
         this.context = context;
         this.values = values;
     }
@@ -28,20 +25,13 @@ public class GroupsArrayAdapter<Object> extends ArrayAdapter<Object> {
         LayoutInflater inflater = (LayoutInflater) context
                 .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
-        View view = inflater.inflate(R.layout.chats_item, parent, false);
+        View view = inflater.inflate(android.R.layout.simple_list_item_1, parent, false);
         TextView msgView = (TextView) view.findViewById(R.id.Msg);
         TextView timeView = (TextView) view.findViewById(R.id.MsgTimeFrom);
         msgView.setText(((ChatMessage)values.get(position)).getMessage());
         timeView.setText(((ChatMessage)values.get(position)).getFrom() + ", " +
                 ((ChatMessage)values.get(position)).getTimestamp());
 
-        Firebase firebase = new Firebase((String) context.getResources().getText(R.string.firebase_url));
-        String user = firebase.getAuth().getProviderData().get("email").toString();
-
-        if( ((ChatMessage)values.get(position)).getFrom().equals(user) ) {
-            msgView.setGravity(Gravity.RIGHT);
-            timeView.setGravity(Gravity.RIGHT);
-        }
         return view;
     }
 }
