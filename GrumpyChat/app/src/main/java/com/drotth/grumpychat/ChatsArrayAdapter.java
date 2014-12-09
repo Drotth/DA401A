@@ -45,6 +45,18 @@ public class ChatsArrayAdapter<Object> extends ArrayAdapter<Object> {
         return view;
     }
 
+    public ChatMessage getItemById(String id){
+        ChatMessage msg = null;
+
+        for (int i = 0; i < values.size(); i++){
+            msg = (ChatMessage) values.get(i);
+            if (msg.getId().equals(id)){
+                break;
+            }
+        }
+        return msg;
+    }
+
     //TODO: Makes scrolling much smoother but the text positioning doesn't work.
 //    public View getView(int position, View convertView, ViewGroup parent) {
 //        ViewHolder viewHolder = new ViewHolder();
