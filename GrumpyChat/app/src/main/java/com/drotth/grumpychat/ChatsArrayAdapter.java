@@ -14,6 +14,7 @@ import java.util.ArrayList;
 
 public class ChatsArrayAdapter<Object> extends ArrayAdapter<Object> {
 
+    private View view;
     private final Context context;
     private final ArrayList<Object> values;
 
@@ -28,7 +29,7 @@ public class ChatsArrayAdapter<Object> extends ArrayAdapter<Object> {
         LayoutInflater inflater = (LayoutInflater) context
                 .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
-        View view = inflater.inflate(R.layout.chats_item, parent, false);
+        view = inflater.inflate(R.layout.chats_item, parent, false);
         TextView msgView = (TextView) view.findViewById(R.id.Msg);
         TextView timeView = (TextView) view.findViewById(R.id.MsgTimeFrom);
         msgView.setText(((ChatMessage)values.get(position)).getMessage());
@@ -42,6 +43,7 @@ public class ChatsArrayAdapter<Object> extends ArrayAdapter<Object> {
             msgView.setGravity(Gravity.RIGHT);
             timeView.setGravity(Gravity.RIGHT);
         }
+
         return view;
     }
 
