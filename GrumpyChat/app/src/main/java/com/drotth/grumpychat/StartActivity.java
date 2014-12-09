@@ -82,9 +82,11 @@ public class StartActivity extends Activity {
             return;
         }
 
-        findViewById(R.id.loginBtn).setVisibility(View.GONE);
-        findViewById(R.id.regBtn1).setVisibility(View.GONE);
-        findViewById(R.id.loadingPanelLogin).setVisibility(View.VISIBLE);
+        if (loginPage.isVisible()) {
+            findViewById(R.id.loginBtn).setVisibility(View.GONE);
+            findViewById(R.id.regBtn1).setVisibility(View.GONE);
+            findViewById(R.id.loadingPanelLogin).setVisibility(View.VISIBLE);
+        }
 
         firebase.authWithPassword(email, password, new Firebase.AuthResultHandler() {
             @Override
@@ -95,9 +97,11 @@ public class StartActivity extends Activity {
             }
             @Override
             public void onAuthenticationError(FirebaseError error) {
-                findViewById(R.id.loadingPanelLogin).setVisibility(View.GONE);
-                findViewById(R.id.loginBtn).setVisibility(View.VISIBLE);
-                findViewById(R.id.regBtn1).setVisibility(View.VISIBLE);
+                if (loginPage.isVisible()) {
+                    findViewById(R.id.loadingPanelLogin).setVisibility(View.GONE);
+                    findViewById(R.id.loginBtn).setVisibility(View.VISIBLE);
+                    findViewById(R.id.regBtn1).setVisibility(View.VISIBLE);
+                }
 
                 switch (error.getCode()) {
                     case FirebaseError.INVALID_PASSWORD:
