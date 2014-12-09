@@ -3,16 +3,19 @@ package com.drotth.grumpychat;
 import android.app.ActionBar;
 import android.app.Activity;
 import android.app.FragmentManager;
-import android.app.FragmentTransaction;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.ViewConfiguration;
 
+import com.firebase.client.Firebase;
+
 import java.lang.reflect.Field;
 
-public class MainActivity extends Activity implements GroupsFragment.OnGroupsInteractionListener {
+public class MainActivity extends Activity {
 
+    private Firebase firebase;
     private FragmentManager fragmentManager;
     protected ActionBar actionBar;
     private GroupsFragment groupsPage;
@@ -23,8 +26,9 @@ public class MainActivity extends Activity implements GroupsFragment.OnGroupsInt
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
+        firebase = new Firebase((String)getResources().getText(R.string.firebase_url));
         actionBar = getActionBar();
+        fragmentManager = getFragmentManager();
 
         // Force the Overflow Menu to show even on phones with dedicated menu button
         try {
@@ -36,12 +40,12 @@ public class MainActivity extends Activity implements GroupsFragment.OnGroupsInt
             }
         } catch (Exception exc) {}
 
-        fragmentManager = getFragmentManager();
-        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-
         groupsPage = new GroupsFragment();
-        fragmentTransaction.add(R.id.fragmentViewMain, groupsPage);
-        fragmentTransaction.commit();
+        fragmentManager.beginTransaction()
+                .setCustomAnimations(android.R.animator.fade_in, android.R.animator.fade_out,
+                        android.R.animator.fade_in, android.R.animator.fade_out)
+                .add(R.id.fragmentViewMain, groupsPage)
+                .commit();
     }
 
     @Override
@@ -52,30 +56,35 @@ public class MainActivity extends Activity implements GroupsFragment.OnGroupsInt
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        int id = item.getItemId();
-
-        if (id == R.id.action_about) {
-            if (aboutPage == null || !aboutPage.isAdded()){
-                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        switch (item.getItemId()){
+            case R.id.action_about:
                 aboutPage = new AboutFragment();
-                fragmentTransaction.replace(R.id.fragmentViewMain, aboutPage);
-                fragmentTransaction.addToBackStack(null);
-                fragmentTransaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
-                fragmentTransaction.commit();
-                return true;
-            }
+                fragmentManager.beginTransaction()
+                        .setCustomAnimations(android.R.animator.fade_in, android.R.animator.fade_out,
+                                android.R.animator.fade_in, android.R.animator.fade_out)
+                        .replace(R.id.fragmentViewMain, aboutPage)
+                        .addToBackStack(null)
+                        .commit();
+                break;
+
+            case R.id.action_log_out:
+                firebase.unauth();
+                Intent startIntent = new Intent(this, StartActivity.class);
+                this.startActivity(startIntent);
+                this.finish();
+                break;
         }
 
         return super.onOptionsItemSelected(item);
     }
 
-    @Override
-    public void onGroupClick(String groupName) {
-        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-        chatPage = ChatFragment.newInstance(groupName);
-        fragmentTransaction.replace(R.id.fragmentViewMain, chatPage);
-        fragmentTransaction.addToBackStack(null);
-        fragmentTransaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
-        fragmentTransaction.commit();
+    public void onGroupClick(Group group) {
+        chatPage = ChatFragment.newInstance(group);
+        fragmentManager.beginTransaction()
+                .setCustomAnimations(android.R.animator.fade_in, android.R.animator.fade_out,
+                        android.R.animator.fade_in, android.R.animator.fade_out)
+                .replace(R.id.fragmentViewMain, chatPage)
+                .addToBackStack(null)
+                .commit();
     }
 }

@@ -4,17 +4,16 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <ScrollView
-        android:layout_width="fill_parent"
-        android:layout_height="0dip"
-        android:layout_weight="1">
-
         <ListView
-            android:id="@+id/ChatFlow"
+            android:id="@+id/chatFlow"
+            android:layout_weight="1"
             android:layout_width="fill_parent"
-            android:layout_height="wrap_content"/>
-
-        </ScrollView>
+            android:layout_height="0dp"
+            android:layout_margin="0dp"
+            android:divider="@android:color/transparent"
+            android:dividerHeight="6dp"
+            android:transcriptMode="alwaysScroll"
+            android:stackFromBottom="true"/>
 
     <LinearLayout
         android:layout_width="fill_parent"
@@ -24,7 +23,7 @@
         android:baselineAligned="true">
 
         <EditText
-            android:id="@+id/ChatInputField"
+            android:id="@+id/chatInputField"
             android:layout_weight="1"
             android:layout_height="50dp"
             android:layout_width="0dip">
@@ -32,9 +31,10 @@
             </EditText>
 
         <Button
-            android:id="@+id/SendBtn"
+            android:id="@+id/sendBtn"
             android:layout_height="50dp"
             android:layout_width="100dp"
+            android:background="@color/white"
             android:text="@string/send"/>
 
         </LinearLayout>
