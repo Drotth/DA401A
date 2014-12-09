@@ -67,7 +67,16 @@ public class ChatFragment extends Fragment implements Button.OnClickListener {
             }
 
             @Override
-            public void onChildChanged(DataSnapshot snapshot, String s) {}
+            public void onChildChanged(DataSnapshot snapshot, String s) {
+                Map<String, Object> data = (Map<String, Object>) snapshot.getValue();
+                String id = snapshot.getName();
+                ChatMessage msg = chatsListAdapter.getItemById(id);
+                msg.setId((String) snapshot.getName());
+                msg.setFrom((String) data.get("from"));
+                msg.setMessage((String) data.get("message"));
+                msg.setTimestamp((String) data.get("time"));
+                chatsListAdapter.notifyDataSetChanged();
+            }
 
             @Override
             public void onChildRemoved(DataSnapshot snapshot) {
