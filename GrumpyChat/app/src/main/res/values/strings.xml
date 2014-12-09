@@ -3,7 +3,7 @@
 
     <!-- General -->
     <string name="app_name">GrumpyChat</string>
-    <string name="firebase_url">https://testda401a.firebaseio.com</string>
+    <string name="firebase_url">https://da401a.firebaseio.com</string>
 
     <!-- Start activity -->
     <string name="email">Email</string>
