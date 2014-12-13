@@ -6,9 +6,11 @@ import android.text.format.Time;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.TabWidget;
 import android.widget.Toast;
 
 import com.firebase.client.ChildEventListener;
@@ -20,7 +22,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
-public class ChatFragment extends Fragment implements Button.OnClickListener {
+public class ChatFragment extends Fragment implements Button.OnClickListener, ListView.OnItemLongClickListener {
 
     private View view;
     private String groupName = "Loading..";
@@ -67,10 +69,24 @@ public class ChatFragment extends Fragment implements Button.OnClickListener {
             }
 
             @Override
-            public void onChildChanged(DataSnapshot snapshot, String s) {}
+            public void onChildChanged(DataSnapshot snapshot, String s) {
+                Map<String, Object> data = (Map<String, Object>) snapshot.getValue();
+                String id = snapshot.getName();
+                ChatMessage msg = chatsListAdapter.getItemById(id);
+                msg.setId((String) snapshot.getName());
+                msg.setFrom((String) data.get("from"));
+                msg.setMessage((String) data.get("message"));
+                msg.setTimestamp((String) data.get("time"));
+                chatsListAdapter.notifyDataSetChanged();
+            }
 
             @Override
-            public void onChildRemoved(DataSnapshot snapshot) {}
+            public void onChildRemoved(DataSnapshot snapshot) {
+                Map<String, Object> data = (Map<String, Object>) snapshot.getValue();
+                String id = snapshot.getName();
+                chatsListAdapter.remove(chatsListAdapter.getItemById(id));
+                chatsListAdapter.notifyDataSetChanged();
+            }
 
             @Override
             public void onChildMoved(DataSnapshot snapshot, String previousChildName) {}
@@ -87,6 +103,7 @@ public class ChatFragment extends Fragment implements Button.OnClickListener {
 
         chatsList = (ListView) view.findViewById(R.id.chatFlow);
         chatsList.setAdapter(chatsListAdapter);
+        chatsList.setOnItemLongClickListener(this);
 
         Button sendButton = (Button) view.findViewById(R.id.sendBtn);
         sendButton.setOnClickListener(this);
@@ -124,5 +141,15 @@ public class ChatFragment extends Fragment implements Button.OnClickListener {
 
         firebase.updateChildren(chatMessages);
         chatMessageInput.setText("");
+    }
+
+    @Override
+    public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
+        //Toast.makeText(getActivity(), "hehe " + position, Toast.LENGTH_SHORT).show();
+        //Toast.makeText(getActivity(), ((ChatMessage)chatsListAdapter.getItem(position)).getMessage(), Toast.LENGTH_SHORT).show();
+        ChatMessage msg = (ChatMessage)chatsListAdapter.getItem(position);
+        firebase.child(msg.getId()).setValue(null);
+        chatsListAdapter.notifyDataSetChanged();
+        return false;
     }
 }

@@ -58,8 +58,6 @@ public class StartActivity extends Activity {
                                     android.R.animator.fade_in, android.R.animator.fade_out)
                             .replace(R.id.fragmentViewStart, registerPage)
                             .addToBackStack(null)
-                            // TODO: for VG, is it .setTransition or .setCustomAnimations?
-                            //.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
                             .commit();
                 }
                 break;
