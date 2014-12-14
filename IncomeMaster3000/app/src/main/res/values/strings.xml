@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-
     <string name="app_name">IncomeMaster3000</string>
-    <string name="hello_world">Hello world!</string>
-    <string name="action_settings">Settings</string>
-
+    <string name="menu_income">Income</string>
+    <string name="menu_expenses">Expenses</string>
+    <string name="menu_summary">Summary</string>
 </resources>
