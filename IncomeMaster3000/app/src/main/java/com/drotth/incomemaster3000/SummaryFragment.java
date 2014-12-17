@@ -10,7 +10,7 @@ import android.widget.TextView;
 
 public class SummaryFragment extends Fragment {
     private DatabaseController database;
-    private TextView totalAmountIncomes, totalAmountExpenses, totalDiff;
+    private TextView totalIncomesView, totalExpensesView, totalDiffView;
     private int totalIncomes, totalExpenses, totalBudget;
 
     @Override
@@ -30,18 +30,21 @@ public class SummaryFragment extends Fragment {
                              Bundle savedInstanceState) {
         View myInflater = inflater.inflate(R.layout.fragment_summary, container, false);
 
-        totalAmountExpenses = (TextView)myInflater.findViewById(R.id.textView_sumExpenses);
-        totalAmountIncomes= (TextView)myInflater.findViewById(R.id.textView_sumIncomes);
-        totalDiff=(TextView)myInflater.findViewById(R.id.textView_sumDiff);
+        totalExpensesView = (TextView) myInflater.findViewById(R.id.summary_expenses2);
+        totalIncomesView = (TextView) myInflater.findViewById(R.id.summary_incomes2);
+        totalDiffView = (TextView) myInflater.findViewById(R.id.summary_diff2);
 
-        Button button = (Button) myInflater.findViewById(R.id.button_summary);
+        Button button = (Button) myInflater.findViewById(R.id.summary_button);
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                totalAmountExpenses.setText("Expenses:\t"+database.getExpensesSum());
-                totalAmountIncomes.setText("Incomes:\t"+database.getIncomesSum());
-                int totalBudget = database.getIncomesSum()-database.getExpensesSum();
-                totalDiff.setText("Total relation:\t"+totalBudget);
+                totalIncomes = database.getIncomesSum();
+                totalExpenses = database.getExpensesSum();
+
+                totalIncomesView.setText(""+totalIncomes);
+                totalExpensesView.setText(""+totalExpenses);
+                totalBudget = totalIncomes-totalExpenses;
+                totalDiffView.setText(""+totalBudget);
             }
         });
 

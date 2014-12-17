@@ -6,6 +6,9 @@ import android.app.FragmentTransaction;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.ViewConfiguration;
+
+import java.lang.reflect.Field;
 
 public class MainActivity extends Activity {
 
@@ -22,6 +25,17 @@ public class MainActivity extends Activity {
         incomes = new IncomesFragment();
         expenses = new ExpensesFragment();
         summary = new SummaryFragment();
+
+        // Force the Overflow Menu to show even on phones with dedicated menu button
+        try {
+            ViewConfiguration config = ViewConfiguration.get(this);
+            Field menuKeyField = ViewConfiguration.class.getDeclaredField("sHasPermanentMenuKey");
+            if(menuKeyField != null) {
+                menuKeyField.setAccessible(true);
+                menuKeyField.setBoolean(config, false);
+            }
+        } catch (Exception exc) {}
+
 
         FragmentTransaction ft = fm.beginTransaction();
         ft.add(R.id.container, incomes);

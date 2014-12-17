@@ -23,14 +23,14 @@ public class DatabaseController extends SQLiteOpenHelper {
         db.execSQL("CREATE TABLE " + DB_TABLE_INCOMES +
                 "(_id integer primary key autoincrement, " +
                 "Date text not null, " +
-                "Amount int not null,"+
+                "Amount int not null," +
                 "Title text not null);");
 
 
         db.execSQL("CREATE TABLE " + DB_TABLE_EXPENSES +
                 "(_id integer primary key autoincrement, " +
                 "Date text not null, " +
-                "Amount int not null,"+
+                "Amount int not null," +
                 "Title text not null);");
     }
 

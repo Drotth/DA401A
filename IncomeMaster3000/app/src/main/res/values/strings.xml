@@ -11,5 +11,8 @@
     <string name="add_expense">Add expense</string>
     <string name="create_entry">Create entry</string>
     <string name="update">Update</string>
+    <string name="sum_incomes">Total incomes:</string>
+    <string name="sum_expenses">Total expenses:</string>
+    <string name="sum_relation">Relation:</string>
 
 </resources>
