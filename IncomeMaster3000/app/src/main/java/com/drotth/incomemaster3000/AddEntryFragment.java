@@ -55,6 +55,7 @@ public class AddEntryFragment extends Fragment {
                 String newTitle = title.getText().toString();
 
                 database.newData(entry, newTitle, newAmount, newDate);
+                getFragmentManager().popBackStack();
             }
         });
 

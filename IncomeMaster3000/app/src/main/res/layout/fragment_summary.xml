@@ -4,76 +4,9 @@
     android:layout_height="match_parent"
     android:padding="@dimen/activity_horizontal_margin">
 
-    <LinearLayout
-        android:orientation="horizontal"
+    <com.github.mikephil.charting.charts.PieChart
+        android:id="@+id/chart"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="50dp">
-
-        <TextView
-            android:id="@+id/summary_incomes"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/sum_incomes"
-            android:layout_marginRight="16dp"
-            android:textAppearance="?android:attr/textAppearanceMedium"/>
-
-        <TextView
-            android:id="@+id/summary_incomes2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceMedium"/>
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:orientation="horizontal"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="50dp">
-
-        <TextView
-            android:id="@+id/summary_expenses"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/sum_expenses"
-            android:layout_marginRight="10dp"
-            android:textAppearance="?android:attr/textAppearanceMedium"/>
-
-        <TextView
-            android:id="@+id/summary_expenses2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceMedium"/>
-    </LinearLayout>
-
-    <LinearLayout
-        android:orientation="horizontal"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="50dp">
-
-        <TextView
-            android:id="@+id/summary_diff"
-            android:text="@string/sum_relation"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginRight="41dp"
-            android:textAppearance="?android:attr/textAppearanceLarge"/>
-
-        <TextView
-            android:id="@+id/summary_diff2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceLarge"/>
-    </LinearLayout>
-
-    <Button
-        android:id="@+id/summary_button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_marginTop="20dp"
-        android:text="@string/update"/>
+        android:layout_height="match_parent" />
 
 </LinearLayout>
