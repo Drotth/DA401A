@@ -1,8 +1,10 @@
 package com.drotth.incomemaster3000;
 
+import android.content.Context;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.app.Fragment;
+import android.view.ContextThemeWrapper;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -40,7 +42,12 @@ public class ExpensesFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View root =inflater.inflate(R.layout.fragment_expenses, container, false);
+        // create ContextThemeWrapper from the original Activity Context with the custom theme
+        final Context contextThemeWrapper = new ContextThemeWrapper(getActivity(), R.style.AppTheme_red);
+        // clone the inflater using the ContextThemeWrapper
+        LayoutInflater localInflater = inflater.cloneInContext(contextThemeWrapper);
+        // inflate the layout using the cloned inflater, not default inflater
+        View root = localInflater.inflate(R.layout.fragment_expenses, container, false);
 
         expensesView = (ListView) root.findViewById(R.id.listViewExpenses);
         expensesView.setAdapter(adapter);

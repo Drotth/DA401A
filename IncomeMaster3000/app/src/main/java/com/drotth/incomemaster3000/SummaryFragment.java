@@ -10,6 +10,7 @@ import com.github.mikephil.charting.charts.PieChart;
 import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.data.PieData;
 import com.github.mikephil.charting.data.PieDataSet;
+import com.github.mikephil.charting.utils.ColorTemplate;
 import com.github.mikephil.charting.utils.Legend;
 
 import java.util.ArrayList;
@@ -46,7 +47,7 @@ public class SummaryFragment extends Fragment {
         String summary = "Summary: " + totalBudget + " Kr";
         chart.setCenterText(summary);
         chart.setDescription("");
-        chart.setHoleColor(getResources().getColor(R.color.extraLightGrey));
+        chart.setHoleColor(getResources().getColor(R.color.background));
         chart.setHoleRadius(60f);
         chart.setRotationEnabled(false);
         setData(totalIncomes, totalExpenses);
