@@ -1,0 +1,17 @@
+# Generated from Android Studio
+.gradle
+/local.properties
+/.idea/workspace.xml
+/.idea/libraries
+.DS_Store
+/build
+
+# Added manually
+/.idea
+/gradle
+*.iml
+*.pro
+*.bat
+*.properties
+gradlew
+settings.gradle
