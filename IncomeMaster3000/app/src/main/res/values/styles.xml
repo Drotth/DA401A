@@ -1,0 +1,27 @@
+<resources>
+
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="android:Theme.Holo.Light">
+        <item name="android:windowBackground">@color/background</item>
+        <item name="android:listViewStyle">@style/CustomListView</item>
+        <item name="android:buttonStyle">@style/CustomButton</item>
+    </style>
+
+    <style name="AppTheme.red">
+        <item name="android:listViewStyle">@style/CustomListView.red</item>
+    </style>
+
+    <style name="CustomListView" parent="@android:style/Widget.ListView">
+        <item name="android:dividerHeight">3dp</item>
+        <item name="android:divider">@color/background</item>
+        <item name="android:background">@drawable/custom_listview_income</item>
+    </style>
+
+    <style name="CustomListView.red">
+        <item name="android:background">@drawable/custom_listview_expense</item>
+    </style>
+
+    <style name="CustomButton" parent="@android:style/Widget.Button">
+        <item name="android:background">@drawable/custom_button</item>
+    </style>
+</resources>

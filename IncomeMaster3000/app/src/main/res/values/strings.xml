@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Income Master 3000</string>
+    <string name="expenses">Expenses</string>
+    <string name="incomes">Incomes</string>
+    <string name="summary">Summary</string>
+    <string name="date">Date</string>
+    <string name="amount">Amount</string>
+    <string name="title">Title</string>
+    <string name="add_income">Add income</string>
+    <string name="add_expense">Add expense</string>
+    <string name="create_entry">Create entry</string>
+    <string name="update">Update</string>
+    <string name="sum_incomes">Total incomes:</string>
+    <string name="sum_expenses">Total expenses:</string>
+    <string name="sum_relation">Relation:</string>
+
+</resources>

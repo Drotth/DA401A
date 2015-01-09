@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="background">@color/extraLightGrey</color>
+    <color name="red">#F44336</color>
+    <color name="lightRed">#FFCDD2</color>
+    <color name="green">#4CAF50</color>
+    <color name="lightGreen">#C8E6C9</color>
+    <color name="extraLightGrey">#EEEEEE</color>
+    <color name="darkgrey">#212121</color>
+    <color name="purple">#84449A</color>
+    <color name="lightPurple">#AF6DC6</color>
+    <color name="extraLightPurple">#C88CDD</color>
+</resources>

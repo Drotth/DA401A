@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Media Playah</string>
+    <string name="menu_stop">Force stop &amp; quit</string>
+    <string name="player_text">Start/stop Music: 1 knock\nNext Song:\t\t\t\t2 knocks\nPrevious
+        song:\t\t3 knocks\nStop Music:\t\t\t\t4 knocks</string>
+</resources>
