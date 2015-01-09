@@ -32,7 +32,7 @@ public class SongsListAdapter<String> extends ArrayAdapter<String> {
         String songName = (String) context.getResources().getResourceName(songID);
         textView.setText("Song: " + songName);
         ImageView imageView = (ImageView) view.findViewById(R.id.list_ImageView);
-        imageView.setImageResource(R.drawable.speakericon);
+        imageView.setImageResource(R.drawable.playicon);
         return view;
     }
 }
