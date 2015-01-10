@@ -2,6 +2,5 @@
 <resources>
     <string name="app_name">Media Playah</string>
     <string name="menu_stop">Force stop &amp; quit</string>
-    <string name="player_text">Start/stop Music: 1 knock\nNext Song:\t\t\t\t2 knocks\nPrevious
-        song:\t\t3 knocks\nStop Music:\t\t\t\t4 knocks</string>
+    <string name="player_text">Knocks\n1: Play/Pause\n2: Next\n3: Previous\n4: Stop</string>
 </resources>

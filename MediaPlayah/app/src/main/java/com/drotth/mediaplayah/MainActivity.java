@@ -8,6 +8,8 @@ import android.hardware.SensorManager;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -41,9 +43,9 @@ public class MainActivity extends ListActivity implements SensorEventListener {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        songs.add(R.raw.game_of_thrones);
-        songs.add(R.raw.the_big_bang_theory);
-        songs.add(R.raw.the_simpsons);
+        songs.add(R.raw.kerning_city_theme);
+        songs.add(R.raw.the_jesters_of_the_moon);
+        songs.add(R.raw.ukulele_the_chocobo);
         current_song = songs.get(counter);
 
         songs_listView = (ListView) findViewById(android.R.id.list);
@@ -57,25 +59,67 @@ public class MainActivity extends ListActivity implements SensorEventListener {
     }
 
     private int nextSong() {
-        counter++;
 
         if (counter > 2) {
             counter = 0;
         } else {
-            current_song = songs.get(counter);;
+            current_song = songs.get(counter);
+            counter++;
         }
         return current_song;
     }
 
     private int prevSong() {
-        counter--;
 
         if (counter < 0) {
             counter = 2;
         } else {
-            current_song = songs.get(counter);;
+            current_song = songs.get(counter);
+            counter--;
         }
         return current_song;
+    }
+
+//    private void updateView(){
+//        ImageView view = (ImageView)(songs_listView.getChildAt(current_song).findViewById(R.id.list_ImageView));
+//        view.setImageResource(R.drawable.pauseicon);
+//    }
+
+    public void playPause(View view){
+        if (player == null || !player.isPlaying()) {
+            Toast.makeText(this, "Starting music!", Toast.LENGTH_SHORT).show();
+            player = MediaPlayer.create(getApplicationContext(), current_song);
+            player.start();
+
+        } else {
+            Toast.makeText(this, "Pausing music!", Toast.LENGTH_SHORT).show();
+            player.pause();
+        }
+    }
+
+    public void next(View view){
+        Toast.makeText(this, "Next song!", Toast.LENGTH_SHORT).show();
+        if (player != null) {
+            player.stop();
+            player = MediaPlayer.create(getApplicationContext(), nextSong());
+            player.start();
+        }
+    }
+
+    public void previous(View view){
+        Toast.makeText(this, "Previous song!", Toast.LENGTH_SHORT).show();
+        if (player != null) {
+            player.stop();
+            player = MediaPlayer.create(getApplicationContext(), prevSong());
+            player.start();
+        }
+    }
+
+    public void stop(View view){
+        Toast.makeText(this, "Stopping music!", Toast.LENGTH_SHORT).show();
+        if (player != null && player.isPlaying()) {
+            player.stop();
+        }
     }
 
     @Override
@@ -87,8 +131,8 @@ public class MainActivity extends ListActivity implements SensorEventListener {
             float z_value = event.values[2];
             float corrected_value = Math.abs(z_value - SensorManager.GRAVITY_EARTH);
 
-            Log.d("GODDAMMIT", "Number of knocks: " + knocks + " Corrected value: " + corrected_value);
-            //reading_textView.setText("Z: " + corrected_value);
+            //Log.d("GODDAMMIT", "Number of knocks: " + knocks + " Corrected value: " + corrected_value);
+            reading_textView.setText("Z: " + corrected_value + " Knocks: " + knocks);
 
             if (knocks > 4) {
                 knock_activated = false;
@@ -105,44 +149,24 @@ public class MainActivity extends ListActivity implements SensorEventListener {
             if (currentTime - knock_first > knock_time && knock_activated){
                 switch (knocks) {
                     case 1:
-                        if (player == null || !player.isPlaying()) {
-                            Toast.makeText(this, "Starting music (" + knocks + ")", Toast.LENGTH_SHORT).show();
-                            player = MediaPlayer.create(getApplicationContext(), current_song);
-                            player.start();
-
-                        } else if(player != null && player.isPlaying()) {
-                            Toast.makeText(this, "Pausing music (" + knocks + ")", Toast.LENGTH_SHORT).show();
-                            player.pause();
-                        }
+                        playPause(null);
+                        //updateView();
                         break;
 
                     case 2:
-                        Toast.makeText(this, "Next song (" + knocks + ")", Toast.LENGTH_SHORT).show();
-                        if (player != null) { //If music is playing already
-                            player.stop();
-                            player = MediaPlayer.create(getApplicationContext(), nextSong());
-                            player.start();
-                        }
+                        next(null);
                         break;
 
                     case 3:
-                        Toast.makeText(this, "previous song (" + knocks + ")", Toast.LENGTH_SHORT).show();
-                        if (player != null) { //If music is playing already
-                            player.stop();
-                            player = MediaPlayer.create(getApplicationContext(), prevSong());
-                            player.start();
-                        }
+                        previous(null);
                         break;
 
                     case 4:
-                        Toast.makeText(this, "Stopping music (" + knocks + ")", Toast.LENGTH_SHORT).show();
-                        if (player != null && player.isPlaying()) { //If music is playing already
-                            player.stop();
-                        }
+                        stop(null);
                         break;
 
                     default:
-                        Toast.makeText(this, "Too many knocks: " + knocks, Toast.LENGTH_SHORT).show();
+                        Toast.makeText(this, "Too many knocks, calm down!", Toast.LENGTH_SHORT).show();
                         break;
                 }
 
@@ -161,12 +185,17 @@ public class MainActivity extends ListActivity implements SensorEventListener {
 
     @Override
     public void onStop(){
-        sensorManager.unregisterListener(this, sensor);
         if (player != null) {
             player.stop();
             player.release();
             player = null;
         }
         super.onStop();
+    }
+
+    @Override
+    public void onDestroy(){
+        sensorManager.unregisterListener(this, sensor);
+        super.onDestroy();
     }
 }
